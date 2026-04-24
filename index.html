@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
   <style>
-    :root {
+     :root {
       --bg:        #0d0d0d;
       --surface:   #161616;
       --card:      #1e1e1e;
@@ -20,8 +20,58 @@
       --font-body: 'DM Sans', sans-serif;
       --radius:    12px;
       --nav-h:     64px;
+      --nav-bg:    rgba(13,13,13,.85);
     }
 
+    /*Variabel Mode Cerah*/
+    body.light {
+      --bg:        #f5f5f0;
+      --surface:   #eaeae4;
+      --card:      #ffffff;
+      --border:    #d8d8d0;
+      --accent:    #5a9e00;
+      --accent2:   #007a6a;
+      --text:      #111111;
+      --muted:     #666666;
+      --nav-bg:    rgba(245,245,240,.88);
+    }
+
+    /*Tombol Switch Dark*/
+    .theme-toggle {
+      width: 44px;
+      height: 24px;
+      background: var(--border);
+      border-radius: 99px;
+      border: none;
+      cursor: pointer;
+      position: relative;
+      transition: background .3s;
+      flex-shrink: 0;
+    }
+    .theme-toggle::after {
+      content: '';
+      position: absolute;
+      top: 3px; left: 3px;
+      width: 18px; height: 18px;
+      background: var(--text);
+      border-radius: 50%;
+      transition: transform .3s, background .3s;
+    }
+    body.light .theme-toggle { background: #aad45a; }
+    body.light .theme-toggle::after { transform: translateX(20px); background: #fff; }
+
+    .theme-toggle-wrap {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+    .theme-icon {
+      font-size: 1rem;
+      line-height: 1;
+      user-select: none;
+    }
+
+    /*Reset*/
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body {
@@ -31,6 +81,7 @@
       font-size: 16px;
       line-height: 1.65;
       overflow-x: hidden;
+      transition: background .35s, color .35s;
     }
     a { color: inherit; text-decoration: none; }
     img {
@@ -39,6 +90,7 @@
       object-fit: cover;
     }
 
+    /*Noise Overlay*/
     body::before {
       content: '';
       position: fixed; inset: 0;
@@ -48,7 +100,7 @@
       z-index: 9999;
     }
 
-    /*  NAVBAR                                              */
+    /*NAVBAR*/
     nav {
       position: fixed; top: 0; left: 0; right: 0;
       height: var(--nav-h);
@@ -541,14 +593,18 @@
       <li><a href="#info">Contact</a></li>
       <li><a href="#profile">Profile</a></li>
     </ul>
+    <!--Switch untuk Mode Dark / Light-->
+    <div class="theme-toggle-wrap">
+      <span class="theme-icon" id="theme-icon">🌙</span>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark/light mode"></button>
+    </div>
+  </nav>
   </nav>
 
   <section id="home">
     <div class="hero-inner">
-
       <div>
         <span class="hero-tag">Mahasiswa Informatika · Esa Unggul</span>
-
         <h1 class="hero-name">
           Welcome to<br>
           <em>Lagan Web</em>
@@ -565,13 +621,11 @@
         </div>
       </div>
 
-      <!-- Right: (Flexbox inside) -->
+      <!--Right: Flexbox inside-->
       <div class="hero-card">
         <p class="hero-card-label">Semester Aktif</p>
         <div class="hero-card-stat">2024/25</div>
-
         <div class="hero-card-divider"></div>
-
         <div class="hero-card-row">
           <span>Program Studi</span>
           <span>Teknik Informatika</span>
@@ -589,13 +643,11 @@
           <span style="color: var(--accent);">● Aktif</span>
         </div>
       </div>
-
     </div>
   </section>
-
+  
   <section id="about">
-
-    <!-- Left: text -->
+    <!--Left: text-->
     <div>
       <p class="section-eyebrow">Tentang Saya</p>
       <h2 class="section-title">Hi...</h2>
@@ -606,7 +658,7 @@
         baik lahir dari kolaborasi, dedikasi, dan rasa ingin tahu yang tidak pernah padam.
       </p>
       <p class="section-body" style="margin-top: .85rem;">
-        Di luar kuliah, saya aktif mengerjakan proyek pribadi — dari aplikasi berbasis Java 
+        Di luar kuliah, saya juga aktif dalam mengerjakan proyek pribadi — mulai dari aplikasi berbasis Java 
         hingga sistem berbasis web — dengan tujuan mengasah kemampuan teknis dan 
         problem-solving secara nyata.
       </p>
@@ -621,7 +673,7 @@
       </div>
     </div>
 
-    <!-- Right: photo / avatar -->
+    <!--Right: avatar-->
     <div class="about-visual">
       <div class="about-img-wrap">
           <img src="foto.jpg" alt="Foto Saya" width="400" height="500">
@@ -631,13 +683,10 @@
         <small>Informatika</small>
       </div>
     </div>
-
   </section>
-
 
   <section id="info">
     <div class="info-wrapper">
-
       <header class="info-header">
         <p class="section-eyebrow">Informasi Kontak</p>
         <h2 class="section-title">Temukan Saya Di Sini</h2>
@@ -646,9 +695,8 @@
         </p>
       </header>
 
-      <!-- Flexbox: contact cards -->
+      <!--Flexbox: contact cards-->
       <div class="info-cards">
-
         <div class="info-card">
           <div class="info-icon">📧</div>
           <div class="info-card-content">
@@ -680,14 +728,12 @@
             <p>@herilagan024</p>
           </div>
         </div>
-
       </div>
     </div>
   </section>
 
 
   <section id="profile">
-
     <header class="profile-header">
       <div>
         <p class="section-eyebrow">Foto Pribadi &amp; Proyek</p>
@@ -696,9 +742,8 @@
       <a href="#" class="btn btn-ghost" style="font-size: .85rem;">Lihat Semua →</a>
     </header>
 
-    <!-- CSS Grid: portfolio cards -->
+    <!--CSS Grid: portfolio cards-->
     <div class="portfolio-grid">
-
       <article class="portfolio-card">
         <div class="portfolio-thumb">☕</div>
         <div class="portfolio-body">
@@ -731,9 +776,7 @@
           </p>
         </div>
       </article>
-
     </div>
-
   </section>
 
   <!--  FOOTER  -->
@@ -742,5 +785,22 @@
     <p style="font-size:.78rem;">· Fasilkom Esa Unggul ·</p>
   </footer>
 
+  <script>
+    const toggle = document.getElementById('theme-toggle');
+    const icon   = document.getElementById('theme-icon');
+    const saved = localStorage.getItem('theme');
+    if (saved === 'light') {
+      document.body.classList.add('light');
+      icon.textContent = '☀️';
+    }
+
+    toggle.addEventListener('click', () => {
+      document.body.classList.toggle('light');
+      const isLight = document.body.classList.contains('light');
+      icon.textContent = isLight ? '☀️' : '🌙';
+      localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    });
+  </script>
+  
 </body>
 </html>
